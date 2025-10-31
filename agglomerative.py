@@ -12,6 +12,8 @@ class AgglomerativeClustering(HierachicalClustering):
 
         distance_matrix = np.zeros( (len(data), len(data)) )
         next_cluster_index = len(data)
+
+        history = []
         
         for i in range(len(data)):
             for j in range(len(data)):
@@ -45,12 +47,16 @@ class AgglomerativeClustering(HierachicalClustering):
             clusters[i] = new_cluster
             clusters.pop(j)
 
+            history.append( [cluster_i_id, cluster_j_id, min_distance, len(new_cluster['points'])] )
+
             next_cluster_index += 1
 
-            print(f'Posição i: {cluster_i_id} - Posição j: {cluster_j_id} - {min_distance}')
-            print(f'Cluster: {new_cluster['id']}: {new_cluster['points']} - Qtd {len(new_cluster['points'])}')
+        return history
 
-            print(f'Estado atual: { [cluster['points'] for cluster in clusters] }')
+            # print(f'Posição i: {cluster_i_id} - Posição j: {cluster_j_id} - {min_distance}')
+            # print(f'Cluster: {new_cluster['id']}: {new_cluster['points']} - Qtd {len(new_cluster['points'])}')
+
+            # print(f'Estado atual: { [cluster['points'] for cluster in clusters] }')
 
         # while len(clusters) > 1:
         #     min_distance = float('inf')
