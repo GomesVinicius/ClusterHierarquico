@@ -1,3 +1,4 @@
+from diviseve import DivisiveClustering, PrimDivisionStrategy
 from agglomerative import AgglomerativeClustering
 from distances import EuclideanDistance
 from linkages import SingleLinkage
@@ -13,8 +14,10 @@ for i, j in enumerate(data):
 distance = EuclideanDistance()
 linkage = SingleLinkage()
 
-agglomerative = AgglomerativeClustering(distance, linkage)
-linkage_matrix = agglomerative.fit(data)
+division_strategy = PrimDivisionStrategy()
+diviseve = DivisiveClustering(distance, None, division_strategy)
+linkage_matrix = diviseve.fit(data)
+print(linkage_matrix, 'AAAAAAAAAAAAAAAAAAAA')
 
 plot_dendogram(linkage_matrix)
 
